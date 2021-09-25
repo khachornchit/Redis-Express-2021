@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Redis+Express</title>
+</head>
+<body>
+<h1>Redis + Express API</h1>
+<button id="api1">API 1</button>
+<button id="api2">API 2</button>
+<button id="api3">API 3</button>
+
+<pre id="output"></pre>
+
+<script>
+    const api1 = document.getElementById('api1')
+    const api2 = document.getElementById('api2')
+    const api3 = document.getElementById('api3')
+    const output = document.getElementById('output')
+
+    api1.addEventListener('click', () => saveRedis(1))
+    api2.addEventListener('click', () => saveRedis(2))
+    api3.addEventListener('click', () => saveRedis(3))
+
+    async function saveRedis(id) {
+        const res = await fetch(`/api${id}`,
+            {method: 'POST'}
+        ).then(t => t.json())
+
+        output.innerText += `\nResponse: ${res.response} Calls = ${res.callsInAMinute}`
+    }
+
+</script>
+
+</body>
+</html>
