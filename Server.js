@@ -30,7 +30,6 @@ const setResponse = (username, repos) => {
     return `<h2>Github >> ${username} has ${repos} repositories!</h2>`
 }
 
-// Cache middleware
 const cache = (req, res, next) => {
     const {username} = req.params;
     client.get(username, (err, data) => {
@@ -55,6 +54,13 @@ app.post('/api1', async (req, res) => {
     // const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
     // const requests = await redis.incr(ip)
     // console.log(`Number of request made so far ${requests}`)
+    //
+    // if(requests > 20) {
+    //     return res.status(503).json({
+    //         response: 'error',
+    //         callsInAMinute: -1
+    //     })
+    // }
 
     return res.json({
         response: 'Ok1',
